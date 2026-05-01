@@ -59,8 +59,19 @@ if "DataVencimento" in df.columns:
 df = df.fillna("")
 
 # TABELA (última coisa)
-st.dataframe(df, use_container_width=True)
+# ======================
+# LINK CLICÁVEL (CORREÇÃO)
+# ======================
+if "Link" in df.columns:
+    df["Abrir PDF"] = df["Link"]
 
+    # opcional: remover coluna antiga
+    df = df.drop(columns=["Link"])
+
+# ======================
+# MOSTRAR TABELA
+# ======================
+st.dataframe(df, use_container_width=True)
 # ======================
 # FORMULÁRIO
 # ======================
