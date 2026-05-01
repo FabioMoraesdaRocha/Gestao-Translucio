@@ -66,7 +66,7 @@ if "Link" in df.columns:
     df["Abrir PDF"] = df["Link"]
 
     # opcional: remover coluna antiga
-    df = df.drop(columns=["Link"])
+    # df = df.drop(columns=["Link"])
 
 # ======================
 # MOSTRAR TABELA
