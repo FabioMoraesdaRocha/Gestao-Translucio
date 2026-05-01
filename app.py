@@ -58,13 +58,11 @@ if "DataVencimento" in df.columns:
 # 🔽 limpar NaN
 df = df.fillna("")
 
-# TABELA (última coisa)
 # ======================
-# LINK CLICÁVEL (CORREÇÃO)
+# LINK CLICÁVEL (SEM APAGAR COLUNA)
 # ======================
 if "Link" in df.columns:
     df["Abrir PDF"] = df["Link"]
-
     # opcional: remover coluna antiga
     # df = df.drop(columns=["Link"])
 
