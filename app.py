@@ -9,6 +9,11 @@ url = "https://docs.google.com/spreadsheets/d/1eX28N9DyCgR8MTD6Ol8MtHOJQ1e3GPamw
 
 try:
     df = pd.read_csv(url)
+    # FILTRO POR EMPRESA
+empresa = st.selectbox("Filtrar por empresa", ["Todas"] + list(df["Empresa"].dropna().unique()))
+
+if empresa != "Todas":
+    df = df[df["Empresa"] == empresa]
     st.write("Dados carregados com sucesso ✅")
     st.dataframe(df)
 
