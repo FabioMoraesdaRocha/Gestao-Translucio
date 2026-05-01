@@ -39,9 +39,7 @@ if "DataVencimento" in df.columns:
     if not vencendo.empty:
         st.warning(f"⚠️ {len(vencendo)} documentos vencendo em até 30 dias")
 
-# ======================
 # LINK PDF
-# ======================
 if "Link" in df.columns:
     def link_pdf(x):
         if pd.notna(x):
@@ -50,10 +48,18 @@ if "Link" in df.columns:
 
     df["Link"] = df["Link"].apply(link_pdf)
 
-# ======================
-# TABELA
-# ======================
-st.write(df.to_html(escape=False, index=False), unsafe_allow_html=True)
+# 🔽 AQUI entra a correção das datas
+if "DataInicio" in df.columns:
+    df["DataInicio"] = pd.to_datetime(df["DataInicio"], errors="coerce").dt.strftime("%d/%m/%Y")
+
+if "DataVencimento" in df.columns:
+    df["DataVencimento"] = pd.to_datetime(df["DataVencimento"], errors="coerce").dt.strftime("%d/%m/%Y")
+
+# 🔽 limpar NaN
+df = df.fillna("")
+
+# TABELA (última coisa)
+st.dataframe(df, use_container_width=True)
 
 # ======================
 # FORMULÁRIO
